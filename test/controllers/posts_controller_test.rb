@@ -45,4 +45,12 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to posts_url
   end
+
+  test "deletes all posts with ID" do
+    assert_difference('Post.count', -1) do
+      delete bulk_posts_url,
+        params: { ids: [posts(:one).id, posts(:two).id] },
+        as:     :json
+    end
+  end
 end

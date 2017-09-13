@@ -66,7 +66,7 @@ class PostsController < ApplicationController
     ids = params[:ids]
 
     posts = Post.find(ids)
-    posts.destroy_all
+    posts.each(&:destroy)
 
     respond_to do |format|
       format.json { head :no_content }
